@@ -1,0 +1,44 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv/
+.env/
+.env
+.env.*
+!.env.example
+
+# Docker
+.dockerignore
+*.tar
+*.tar.gz
+.docker-data/
+
+# Redis
+dump.rdb
+appendonly.aof
+
+# Daphne & WebSockets
+daphne.log
+asgi.log
+websocket.log
+*.sock
