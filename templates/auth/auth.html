@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Log In and Sign Up</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+</head>
+<body data-active-tab="{{ active_tab }}">
+
+<div class="card">
+  <p class="mark">Pie</p>
+
+  <div class="tabs">
+    <span class="glider" id="glider"></span>
+    <button type="button" id="btn-login" class="tab-btn">Log In</button>
+    <button type="button" id="btn-signup" class="tab-btn">Sign Up</button>
+  </div>
+
+  <div class="panels">
+    <div class="panel" id="panel-login">
+      <form method="post" action="{% url 'auth:auth' %}" novalidate>
+        {% csrf_token %}
+        <input type="hidden" name="form_type" value="login">
+
+        {% if login_form.non_field_errors %}
+        <div class="form-error">{{ login_form.non_field_errors.0 }}</div>
+        {% endif %}
+
+        <div class="field">
+          <label for="{{ login_form.username.id_for_label }}">Username</label>
+          {{ login_form.username }}
+          {% if login_form.username.errors %}
+          <ul class="errors">{% for e in login_form.username.errors %}<li>{{ e }}</li>{% endfor %}</ul>
+          {% endif %}
+        </div>
+        <div class="field">
+          <label for="{{ login_form.password.id_for_label }}">Password</label>
+          {{ login_form.password }}
+          {% if login_form.password.errors %}
+          <ul class="errors">{% for e in login_form.password.errors %}<li>{{ e }}</li>{% endfor %}</ul>
+          {% endif %}
+        </div>
+        <button type="submit" class="submit">Enter</button>
+      </form>
+      <p class="foot">Do not have account? <button type="button" id="link-signup">Create</button></p>
+    </div>
+
+    <div class="panel" id="panel-signup">
+      <form method="post" action="{% url 'auth:auth' %}" novalidate>
+        {% csrf_token %}
+        <input type="hidden" name="form_type" value="signup">
+        <div class="field">
+          <label for="{{ signup_form.username.id_for_label }}">Username</label>
+          {{ signup_form.username }}
+          {% if signup_form.username.errors %}
+          <ul class="errors">{% for e in signup_form.username.errors %}<li>{{ e }}</li>{% endfor %}</ul>
+          {% endif %}
+        </div>
+        <div class="field">
+          <label for="{{ signup_form.email.id_for_label }}">Email</label>
+          {{ signup_form.email }}
+          {% if signup_form.email.errors %}
+          <ul class="errors">{% for e in signup_form.email.errors %}<li>{{ e }}</li>{% endfor %}</ul>
+          {% endif %}
+        </div>
+        <div class="field">
+          <label for="{{ signup_form.password.id_for_label }}">Password</label>
+          {{ signup_form.password }}
+          {% if signup_form.password.errors %}
+          <ul class="errors">{% for e in signup_form.password.errors %}<li>{{ e }}</li>{% endfor %}</ul>
+          {% endif %}
+        </div>
+        <div class="field">
+          <label for="{{ signup_form.password_confirm.id_for_label }}">Confirm password</label>
+          {{ signup_form.password_confirm }}
+          {% if signup_form.password_confirm.errors %}
+          <ul class="errors">{% for e in signup_form.password_confirm.errors %}<li>{{ e }}</li>{% endfor %}</ul>
+          {% endif %}
+        </div>
+        <button type="submit" class="submit">Create account</button>
+      </form>
+      <p class="foot">You have an account? <button type="button" id="link-login">Log In</button></p>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'js/auth.js' %}"></script>
+</body>
+</html>

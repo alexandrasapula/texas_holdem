@@ -1,0 +1,190 @@
+:root {
+    --blush: #fdf3f6;
+    --card: #fffbfc;
+    --rose: #e8a9c1;
+    --rose-deep: #c96e94;
+    --plum: #5c3a49;
+    --plum-soft: #8a6472;
+    --line: #f2dbe4;
+    --error: #b5556f;
+  }
+  
+* { box-sizing: border-box; }
+  
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+    background: radial-gradient(circle at 20% 15%, #fbe7ee 0%, var(--blush) 45%, #f7ecef 100%);
+    font-family: 'Manrope', sans-serif;
+    color: var(--plum);
+}
+  
+.card {
+    width: 100%;
+    max-width: 400px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 40px 36px 32px;
+    box-shadow: 0 20px 50px -20px rgba(201, 110, 148, 0.35);
+    overflow: hidden;
+}
+  
+.mark {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 30px;
+    color: var(--rose-deep);
+    letter-spacing: 0.3px;
+    margin: 0 0 28px;
+}
+  
+.tabs {
+    position: relative;
+    display: flex;
+    background: var(--blush);
+    border-radius: 999px;
+    padding: 4px;
+    margin-bottom: 30px;
+}
+  
+.tabs button {
+    flex: 1;
+    border: none;
+    background: transparent;
+    text-align: center;
+    padding: 10px 0;
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--plum-soft);
+    border-radius: 999px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    transition: color 0.25s ease;
+}
+  
+.tabs button.active { color: #fff; }
+  
+.glider {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: 4px;
+    width: calc(50% - 4px);
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+    transition: transform 0.3s ease;
+}
+  
+.panels { position: relative; }
+  
+.panel {
+    display: none;
+    animation: fade 0.25s ease;
+}
+  
+.panel.active { display: block; }
+  
+@keyframes fade {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+  
+.field { margin-bottom: 16px; }
+  
+.field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--plum-soft);
+    margin-bottom: 6px;
+}
+  
+.field input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #fffdfe;
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    color: var(--plum);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+  
+.field input::placeholder { color: #c9aab6; }
+  
+.field input:focus {
+    border-color: var(--rose-deep);
+    box-shadow: 0 0 0 3px rgba(201, 110, 148, 0.15);
+}
+  
+.field .errors {
+    margin: 6px 0 0;
+    padding: 6px 10px;
+    list-style: none;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--error);
+    background: #fdf0f3;
+    border-left: 3px solid var(--error);
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+  
+.form-error {
+    margin: 0 0 16px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: #fbe4ea;
+    color: var(--error);
+    font-size: 13px;
+}
+  
+.submit {
+    width: 100%;
+    padding: 13px 0;
+    margin-top: 8px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+    color: #fff;
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+  
+.submit:hover { filter: brightness(1.05); transform: translateY(-1px); }
+.submit:active { transform: translateY(0); }
+  
+.foot {
+    text-align: center;
+    font-size: 12px;
+    color: var(--plum-soft);
+    margin-top: 18px;
+}
+  
+.foot button {
+    border: none;
+    background: none;
+    color: var(--rose-deep);
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+}
