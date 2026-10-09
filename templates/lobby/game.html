@@ -1,0 +1,20 @@
+{% extends "lobby/base.html" %}
+{% load static %}
+{% block title %}Game · Pie{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/game.css' %}">{% endblock %}
+
+{% block content %}
+<section class="card wait-card">
+  <h1 class="title room-title">{{ room.name }}</h1>
+  <p class="lead">The game will live here. Players at the table:</p>
+  <ul class="player-list">
+    {% for p in players %}<li>{{ p.user.username }}</li>{% endfor %}
+  </ul>
+  <form method="post" action="{% url 'lobby:leave' %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-ghost">Back to lobby</button>
+  </form>
+</section>
+{% endblock %}
+
+{% block scripts %}<script src="{% static 'js/game.js' %}"></script>{% endblock %}

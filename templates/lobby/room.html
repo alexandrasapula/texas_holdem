@@ -1,0 +1,33 @@
+{% extends "lobby/base.html" %}
+{% load static %}
+{% block title %}{{ room.name }} · Pie{% endblock %}
+
+{% block content %}
+<section class="card wait-card" id="room"
+         data-state="{% url 'lobby:room_state' room.pk %}"
+         data-lobby="{% url 'lobby:lobby' %}"
+         data-avatar="{% static 'img/avatar.png' %}">
+  <span class="status" id="status"><i class="pulse"></i><span id="status-text">Waiting for players</span></span>
+  <h1 class="title room-title" id="room-name">{{ room.name }}</h1>
+  <p class="lead" id="hint">The game starts automatically when all seats are taken.</p>
+
+  <div class="slots" id="slots" aria-live="polite"></div>
+
+  <div class="progress" aria-hidden="true"><div class="progress-bar" id="progress"></div></div>
+  <p class="count-line"><span id="count">0</span> of <span id="max">4</span> players</p>
+
+  <div class="countdown" id="countdown" hidden>
+    <p class="countdown-label">Everyone is here. Starting in</p>
+    <p class="countdown-num" id="countdown-num">3</p>
+  </div>
+
+  <form method="post" action="{% url 'lobby:leave' %}" id="leave-form">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-ghost">Leave room</button>
+  </form>
+</section>
+
+{{ initial_state|json_script:"room-initial" }}
+{% endblock %}
+
+{% block scripts %}<script src="{% static 'js/room.js' %}"></script>{% endblock %}

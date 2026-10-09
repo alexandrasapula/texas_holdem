@@ -1,0 +1,34 @@
+{% extends "lobby/base.html" %}
+{% load static %}
+{% block title %}Lobby · Pie{% endblock %}
+
+{% block content %}
+<div class="layout">
+  <section class="card create">
+    <h1 class="title">New room</h1>
+    <p class="lead">Start a table for {{ max_players }} players. The game begins as soon as it's full.</p>
+    <form method="post" action="{% url 'lobby:create' %}" novalidate>
+      {% csrf_token %}
+      <div class="field">
+        <label for="{{ form.name.id_for_label }}">Room name</label>
+        {{ form.name }}
+      </div>
+      <button type="submit" class="submit">Create room</button>
+    </form>
+  </section>
+
+  <section class="card rooms-card">
+    <div class="rooms-head">
+      <h2 class="title">Open rooms</h2>
+      <span class="pill" id="rooms-count">0</span>
+    </div>
+    <div id="rooms" class="rooms"
+         data-api="{% url 'lobby:rooms_api' %}"
+         data-join-url="{% url 'lobby:join' 0 %}"></div>
+  </section>
+</div>
+
+{{ initial_rooms|json_script:"rooms-initial" }}
+{% endblock %}
+
+{% block scripts %}<script src="{% static 'js/lobby.js' %}"></script>{% endblock %}
