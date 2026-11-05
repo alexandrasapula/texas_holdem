@@ -126,7 +126,7 @@ def game_view(request, pk):
     room = membership.room
     if room.status != Room.Status.PLAYING:
         return redirect("lobby:room", pk=room.pk)
-    return render(request, "lobby/game.html", {"room": room, "players": room.players.select_related("user")})
+    return redirect("game:table", pk=room.pk)
 
 
 @login_required

@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ room.name }} · Pie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/lobby.css' %}">
+<link rel="stylesheet" href="{% static 'css/poker.css' %}">
+</head>
+<body class="poker">
+<div class="game" id="game"
+     data-room="{{ room.pk }}"
+     data-avatar="{% static 'img/avatar.jpg' %}"
+     data-lobby="{% url 'lobby:lobby' %}">
+
+  <header class="g-top">
+    <span class="brand">Pie</span>
+    <div class="g-info">
+      <span id="hand-label">Hand</span>
+      <span class="dot-sep"></span>
+      <span id="blinds-label">Blinds</span>
+    </div>
+    <div class="g-right">
+      <span class="status conn" id="conn"><i class="pulse"></i><span id="conn-text">Connecting…</span></span>
+      <form method="post" action="{% url 'lobby:leave' %}" id="leave-form">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-ghost btn-sm">Leave table</button>
+      </form>
+    </div>
+  </header>
+
+  <div class="g-main">
+    <section class="table-area">
+      <div class="table" id="table">
+        <div class="felt">
+          <div class="center">
+            <div class="pot"><i class="chip"></i><span><small>Pot</small><b id="pot-amount">0</b></span></div>
+            <div class="board" id="board"></div>
+            <div class="banner" id="banner"></div>
+          </div>
+        </div>
+        <div class="bets" id="bets"></div>
+        <div class="seats" id="seats"></div>
+      </div>
+      <p class="my-hand" id="my-hand"></p>
+
+      <div class="actionbar" id="actions">
+        <p class="act-hint" id="act-hint">Connecting to the table…</p>
+        <div class="act-row">
+          <button type="button" class="btn btn-ghost act" id="btn-fold" disabled>Fold</button>
+          <button type="button" class="btn act" id="btn-call" disabled>Check</button>
+          <div class="raise-box" id="raise-box">
+            <div class="presets">
+              <button type="button" data-preset="min" disabled>Min</button>
+              <button type="button" data-preset="half" disabled>½ pot</button>
+              <button type="button" data-preset="pot" disabled>Pot</button>
+              <button type="button" data-preset="max" disabled>All-in</button>
+            </div>
+            <div class="raise-row">
+              <input type="range" id="raise-range" min="0" max="0" value="0" disabled aria-label="Raise amount">
+              <input type="number" id="raise-input" min="0" max="0" value="0" disabled aria-label="Raise to">
+              <button type="button" class="btn act" id="btn-raise" disabled>Raise</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="side">
+      <section class="card side-card">
+        <h2 class="title sm">Table</h2>
+        <p class="side-line" id="side-blinds"></p>
+        <p class="side-line" id="side-next"></p>
+      </section>
+      <section class="card side-card">
+        <h2 class="title sm">What happened</h2>
+        <ul class="log" id="log"></ul>
+      </section>
+      <details class="card side-card ranks">
+        <summary class="title sm">Hand rankings</summary>
+        <ol>
+          <li><b>Straight flush</b><span>five in a row, same suit</span></li>
+          <li><b>Four of a kind</b><span>four cards of one rank</span></li>
+          <li><b>Full house</b><span>three of a kind + a pair</span></li>
+          <li><b>Flush</b><span>five cards of one suit</span></li>
+          <li><b>Straight</b><span>five in a row</span></li>
+          <li><b>Three of a kind</b><span>three cards of one rank</span></li>
+          <li><b>Two pair</b><span>two different pairs</span></li>
+          <li><b>Pair</b><span>two cards of one rank</span></li>
+          <li><b>High card</b><span>nothing else, the highest card plays</span></li>
+        </ol>
+        <p class="ranks-note">You make the best five-card hand from your 2 cards and the 5 on the table.</p>
+      </details>
+    </aside>
+  </div>
+
+  <div class="overlay" id="final" hidden>
+    <div class="card final-card">
+      <p class="final-crown">♛</p>
+      <h2 class="title" id="final-title">Game over</h2>
+      <p class="lead" id="final-text"></p>
+      <form method="post" action="{% url 'lobby:leave' %}">
+        {% csrf_token %}
+        <button type="submit" class="submit">Back to lobby</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="alert"></div>
+</div>
+<script src="{% static 'js/poker.js' %}"></script>
+</body>
+</html>

@@ -6,7 +6,7 @@
 <section class="card wait-card" id="room"
          data-state="{% url 'lobby:room_state' room.pk %}"
          data-lobby="{% url 'lobby:lobby' %}"
-         data-avatar="{% static 'img/avatar.png' %}">
+         data-avatar="{% static 'img/avatar.jpg' %}">
   <span class="status" id="status"><i class="pulse"></i><span id="status-text">Waiting for players</span></span>
   <h1 class="title room-title" id="room-name">{{ room.name }}</h1>
   <p class="lead" id="hint">The game starts automatically when all seats are taken.</p>
