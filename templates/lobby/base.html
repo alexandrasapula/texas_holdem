@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% block title %}Pie{% endblock %}</title>
+<title>{% block title %}Swag{% endblock %}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
 <body>
 <div class="shell">
   <header class="topbar">
-    <a class="brand" href="{% url 'lobby:lobby' %}">Pie</a>
+    <a class="brand" href="{% url 'lobby:lobby' %}">Swag</a>
     <div class="user">
       <img class="avatar" src="{% static 'img/avatar.jpg' %}" alt="">
       <span class="user-name">{{ request.user.username }}</span>
