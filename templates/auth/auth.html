@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -47,6 +48,15 @@
         </div>
         <button type="submit" class="submit">Enter</button>
       </form>
+      {% if google_enabled %}
+      <div class="divider"><span>or</span></div>
+      <form method="post" action="{% provider_login_url 'google' process='login' %}">
+        {% csrf_token %}
+        <button type="submit" class="google-btn" aria-label="Continue with Google" title="Continue with Google">
+          <img src="{% static 'img/google.png' %}" alt="">
+        </button>
+      </form>
+      {% endif %}
       <p class="foot">Do not have account? <button type="button" id="link-signup">Create</button></p>
     </div>
 
@@ -84,6 +94,15 @@
         </div>
         <button type="submit" class="submit">Create account</button>
       </form>
+      {% if google_enabled %}
+      <div class="divider"><span>or</span></div>
+      <form method="post" action="{% provider_login_url 'google' process='login' %}">
+        {% csrf_token %}
+        <button type="submit" class="google-btn" aria-label="Continue with Google" title="Continue with Google">
+          <img src="{% static 'img/google.png' %}" alt="">
+        </button>
+      </form>
+      {% endif %}
       <p class="foot">You have an account? <button type="button" id="link-login">Log In</button></p>
     </div>
   </div>

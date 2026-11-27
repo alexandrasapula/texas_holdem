@@ -16,10 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import TemplateView
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include('authent.urls')),
+    path('privacy/', TemplateView.as_view(template_name='privacy/privacy.html'), name='privacy'),
     path("lobby/", include("lobby.urls")),
     path("game/", include("game.urls")),
+    path("accounts/login/", RedirectView.as_view(pattern_name="auth:auth")),
+    path("accounts/signup/", RedirectView.as_view(pattern_name="auth:auth")),
+    path("accounts/", include("allauth.urls")),
 ]

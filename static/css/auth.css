@@ -188,3 +188,59 @@ body {
     font-family: inherit;
     font-size: inherit;
 }
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--plum-soft);
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+}
+
+.google-form {
+    display: block;
+    width: 100%;
+    margin: 0;
+  }
+  
+  .google-btn {
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(201, 110, 148, 0.12);
+    transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+  }
+  
+  .google-btn:hover {
+    transform: translateY(-1px);
+    border-color: var(--rose);
+    box-shadow: 0 4px 14px rgba(201, 110, 148, 0.22);
+  }
+  
+  .google-btn:active {
+    transform: translateY(0);
+  }
+  
+  .google-btn img {
+    width: 60px;
+    height: 60px;
+    display: block;
+  }
